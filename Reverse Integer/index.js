@@ -40,3 +40,27 @@ var reverse = function (x) {
   var reversed = `${Math.abs(x)}`.split('').reverse().join('') * Math.sign(x);
   return reversed < -(2 ** 31) || reversed > 2 ** 31 - 1 ? 0 : reversed;
 };
+
+/**
+ * @author https://leetcode.com/problems/reverse-integer/discuss/296135/JavaScript-solution-60ms-(99.87) （好像并没有想象中那么快？）
+ * @param {number} x
+ * @return {number}
+ */
+const reverse = function (x) {
+  const isNegative = x < 0;
+  x = Math.abs(x);
+  let result = 0;
+
+  while (x) {
+    const digit = x % 10;
+    x = Math.floor(x / 10);
+    result = result * 10 + digit;
+  }
+
+  // restrict result to maintain settled overflow
+  if (result > 2 ** 31) {
+    return 0;
+  }
+
+  return isNegative ? -result : result;
+};
