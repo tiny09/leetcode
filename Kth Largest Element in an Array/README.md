@@ -19,3 +19,28 @@ Output: 4
 Note:
 
 You may assume k is always valid, 1 ≤ k ≤ array's length.
+
+# Solution
+## PriorityQueue
+### Algorithm
+
+```
+/**
+* @author reference: https://leetcode.com/problems/kth-largest-element-in-an-array/discuss/60294/Solution-explained
+*/
+class Solution {
+  public int findKthLargest(int[] nums, int k) {
+    final PriorityQueue < Integer > pq = new PriorityQueue<>();
+
+    for (int val : nums) {
+      pq.offer(val);
+
+      if (pq.size() > k) {
+        pq.poll();
+      }
+    }
+
+    return pq.peek();
+  }
+}
+```
